@@ -28,7 +28,7 @@ def find_yesterdays_videos(info_entries):
     # Tegnap dátuma magyar/európai időzónára egyszerűsítve (UTC-t használjuk, mert yt-dlp upload_date a videó feltöltés dátumát adja YYYYMMDD formában)
     today = datetime.utcnow().date()
     yesterday = today - timedelta(days=1)
-    ystr = yesterday.strftime("%Y%m%d")
+    ystr = "20251027"
     result = []
     for e in info_entries:
         # yt-dlp entrykben gyakori: 'upload_date' mező pl. "20251028"
