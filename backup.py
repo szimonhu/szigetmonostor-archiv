@@ -58,7 +58,7 @@ def main():
     # megtaláljuk a tegnapi dátumú videókat
     y_videos = find_yesterdays_videos(entries)
     if not y_videos:
-        print("Nincs tegnapi videó a csatornán.")
+        print("Nincs 27.-i videó a csatornán.")
         return
 
     print(f"Tegnapi videók száma: {len(y_videos)}")
