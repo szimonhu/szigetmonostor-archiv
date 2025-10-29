@@ -24,14 +24,18 @@ def slugify(s):
     s = re.sub(r'-+', '-', s).strip('-')
     return s[:200]
 
-y_videos = [{
-    'webpage_url': 'https://www.youtube.com/watch?v=JuTuSn1M0Rg',
-    'title': 'Képviselő-testületi ülés 2025-10-27',
-    'upload_date': '20251027',
-    'id': 'JuTuSn1M0Rg'
-}]
-
-
+def find_yesterdays_videos(info_entries):
+    # céldátum
+    target_date = datetime.strptime("20251027", "%Y%m%d").date()
+    result = []
+    for e in info_entries:
+        ud = e.get('upload_date')
+        if ud:
+            d = datetime.strptime(ud, "%Y%m%d").date()
+            # +-1 nap eltérés engedve
+            if abs((d - target_date).days) <= 1:
+                result.append(e)
+    return result
 
 def main():
     # 1) Lekérdezzük a csatornát (letöltés nélkül) az infókért
@@ -52,7 +56,16 @@ def main():
     # info lehet playlist-szerű (entries)
     entries = info.get('entries') or []
     # megtaláljuk a tegnapi dátumú videókat
-    y_videos = find_yesterdays_videos(entries)
+    
+    # y_videos = find_yesterdays_videos(entries)
+y_videos = [{
+    'webpage_url': 'https://www.youtube.com/watch?v=JuTuSn1M0Rg',
+    'title': 'Képviselő-testületi ülés 2025-10-27',
+    'upload_date': '20251027',
+    'id': 'JuTuSn1M0Rg'
+}]
+
+    
     if not y_videos:
         print("Nincs 27.-i videó a csatornán.")
         return
