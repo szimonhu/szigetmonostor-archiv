@@ -9,7 +9,7 @@ import yt_dlp
 from internetarchive import upload
 
 # --- Konfiguráció (ha akarod, módosíthatod) ---
-CHANNEL_URL = "https://www.youtube.com/@szigetmonostorhirei8482/streams"
+CHANNEL_URL = "https://www.youtube.com/@szigetmonostorhirei8482/videos"
 DOWNLOAD_DIR = "downloads"
 DOWNLOAD_ARCHIVE_FILE = "downloaded.txt"  # yt-dlp ide írja, mi lett már letöltve
 # Archiv item prefix (archive.org-on belüli item azonosító kezdete)
