@@ -25,17 +25,18 @@ def slugify(s):
     return s[:200]
 
 def find_yesterdays_videos(info_entries):
-    # Tegnap dátuma magyar/európai időzónára egyszerűsítve (UTC-t használjuk, mert yt-dlp upload_date a videó feltöltés dátumát adja YYYYMMDD formában)
-    today = datetime.utcnow().date()
-    yesterday = today - timedelta(days=1)
-    ystr = "20251027"
+    # céldátum
+    target_date = datetime.strptime("20251027", "%Y%m%d").date()
     result = []
     for e in info_entries:
-        # yt-dlp entrykben gyakori: 'upload_date' mező pl. "20251028"
         ud = e.get('upload_date')
-        if ud == ystr:
-            result.append(e)
+        if ud:
+            d = datetime.strptime(ud, "%Y%m%d").date()
+            # +-1 nap eltérés engedve
+            if abs((d - target_date).days) <= 1:
+                result.append(e)
     return result
+
 
 def main():
     # 1) Lekérdezzük a csatornát (letöltés nélkül) az infókért
